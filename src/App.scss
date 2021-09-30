@@ -1,8 +1,14 @@
 .App {
   width: 100%;
 
-  .task-list {
+  .left-block {
     display: flex;
     flex-direction: column;
+
+    .task-list {
+      display: flex;
+      flex-direction: column;
+    }
   }
+
 }

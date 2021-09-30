@@ -5,6 +5,8 @@ export const EditorContext = createContext()
 
 function EditorProvider(props) {
 
+    const [editorOpen, setEditorOpen] = useState(true)
+
     const [editMode, setEditMode] = useState(false)
 
     const [editForm, setEditform] = useState({
@@ -19,11 +21,11 @@ function EditorProvider(props) {
         taskPriority: "",
         taskStatus: "",
         taskDescription: "",
-        taskAsignedTo: ""
+        taskAsignedTo: "Darko"
     })
 
     return (
-        <EditorContext.Provider value={{ editForm, setEditform, editMode, setEditMode }}>
+        <EditorContext.Provider value={{ editorOpen, setEditorOpen, editForm, setEditform, editMode, setEditMode }}>
             {props.children}
         </EditorContext.Provider >
     )

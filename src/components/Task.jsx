@@ -1,4 +1,5 @@
-import React from 'react'
+import { ViewTaskContext } from 'providers/ViewTaskProvider';
+import { useContext } from 'react'
 import 'styles/Task.scss';
 
 function Task({ task }) {
@@ -17,10 +18,19 @@ function Task({ task }) {
         taskAsignedTo
     } = task
 
+    const { viewTask, setViewTask, viewMode, setViewMode } = useContext(ViewTaskContext)
+
+    const viewThisTask = () => {
+        setViewTask(task)
+        setViewMode(true)
+    }
 
     return (
         <div className="Task">
-            <span>{taskID}</span>
+            <span>{taskTitle}</span>
+            <span>{taskAsignedTo}</span>
+            <span>{taskPriority}</span>
+            <button onClick={viewThisTask}>view task</button>
         </div>
     )
 }

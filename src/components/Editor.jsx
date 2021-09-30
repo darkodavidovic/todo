@@ -12,7 +12,7 @@ function Editor() {
     const { taskManager } = useTaskManager()
 
     // all form data are here
-    const { editForm, setEditform, editMode } = useContext(EditorContext)
+    const { editorOpen, editForm, setEditform, editMode } = useContext(EditorContext)
 
     // this will handle all inputs by targeting them once you start typing inside
     const formHanlder = (e) => {
@@ -35,60 +35,68 @@ function Editor() {
         !editMode && taskManager({ ...editForm, taskID: uniqid() }, "addNew")
     }
 
-    return (
-        <div className="Editor" onSubmit={saveTask}>
-            <form>
-                
-                <label>Task Title</label>
-                <input type="text" name="taskTitle" onChange={formHanlder} value={editForm.taskTitle} />
+    if (editorOpen) {
+        return (
+            <div className="Editor" onSubmit={saveTask}>
+                <form>
 
-                <label>Task Category</label>
-                <select name="taskCategory" onChange={formHanlder} value={editForm.taskCategory}>
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
-                </select>
+                    <label>Task Title</label>
+                    <input type="text" name="taskTitle" onChange={formHanlder} value={editForm.taskTitle} />
 
-                <label>Task Created At</label>
-                <input type="datetime-local" name="taskCreatedAt" onChange={formHanlder} value={editForm.taskCreatedAt} />
+                    <label>Task Category</label>
+                    <select name="taskCategory" onChange={formHanlder} value={editForm.taskCategory}>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
 
-                <label>Task should be done at least</label>
-                <input type="datetime-local" name="taskShouldBeDoneIn" onChange={formHanlder} value={editForm.taskShouldBeDoneIn} />
+                    <label>Task Created At</label>
+                    <input type="datetime-local" name="taskCreatedAt" onChange={formHanlder} value={editForm.taskCreatedAt} />
 
-                <label>Task Time Used</label>
-                <input type="text" name="taskTimeUsed" onChange={formHanlder} value={editForm.taskTimeUsed} />
+                    <label>Task should be done at least</label>
+                    <input type="datetime-local" name="taskShouldBeDoneIn" onChange={formHanlder} value={editForm.taskShouldBeDoneIn} />
 
-                <label>Time spended on task</label>
-                <input type="text" name="taskTimeSpended" onChange={formHanlder} value={editForm.taskTimeSpended} />
+                    <label>Task Time Used</label>
+                    <input type="text" name="taskTimeUsed" onChange={formHanlder} value={editForm.taskTimeUsed} />
 
-                <label>Ramaining time</label>
-                <input type="text" name="taskTimeRemains" onChange={formHanlder} value={editForm.taskTimeRemains} />
+                    <label>Time spended on task</label>
+                    <input type="text" name="taskTimeSpended" onChange={formHanlder} value={editForm.taskTimeSpended} />
 
-                <label>Task Priority</label>
-                <input type="text" name="taskPriority" onChange={formHanlder} value={editForm.taskPriority} />
+                    <label>Ramaining time</label>
+                    <input type="text" name="taskTimeRemains" onChange={formHanlder} value={editForm.taskTimeRemains} />
 
-                <label>Task status</label>
-                <input type="text" name="taskStatus" onChange={formHanlder} value={editForm.taskStatus} />
+                    <label>Task Priority</label>
+                    <input type="text" name="taskPriority" onChange={formHanlder} value={editForm.taskPriority} />
 
-                <label>Task Assigned To</label>
-                <input type="text" name="taskAsignedTo" onChange={formHanlder} value={editForm.taskAsignedTo} />
+                    <label>Task status</label>
+                    <select name="taskStatus" onChange={formHanlder} value={editForm.taskStatus}>
+                        <option value="new">New</option>
+                        <option value="in_progress">In Progress</option>
+                        <option value="complete">Complete</option>
+                    </select>
 
-                <label>Task Description</label>
-                <CKEditor editor={ClassicEditor} onChange={handleCKEditor} data={""} disabled={false} />
+                    <label>Task Assigned To</label>
+                    <input type="text" name="taskAsignedTo" onChange={formHanlder} value={editForm.taskAsignedTo} />
 
-                {!editMode ?
-                    <button type="submit">Add Task</button>
-                    :
-                    <button type="submit">Update Task</button>
-                }
-            </form>
+                    <label>Task Description</label>
+                    <CKEditor editor={ClassicEditor} onChange={handleCKEditor} data={""} disabled={false} />
+
+                    {!editMode ?
+                        <button type="submit">Add Task</button>
+                        :
+                        <button type="submit">Update Task</button>
+                    }
+                </form>
 
 
-            {/* <span>
+                {/* <span>
                 {ReactHtmlParser(inputDataToEdit)}
             </span> */}
-        </div>
-    )
+            </div>
+        )
+    }
+    
+    return (null)
 }
 
 export default Editor
