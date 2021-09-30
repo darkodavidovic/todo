@@ -1,3 +1,20 @@
 .Editor {
-    background-color: red;
+    display: flex;
+
+    width: 500px;
+
+    form {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        label {
+            background-color: white;
+            font-weight: bold;
+        }
+
+        .ck-editor {
+            border: 2px solid green;
+        }
+    }
 }
