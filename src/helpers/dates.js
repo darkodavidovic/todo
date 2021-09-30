@@ -14,11 +14,32 @@ function datetimeLocalToTimestamp(inputString) {
 }
 
 function timestampToDatetimeLocal(timestamp) {
-    return new Date(timestamp).toISOString().split(":00.000Z")[0]
+    return new Date(timestamp).toISOString().slice(0, 16)
+    // return new Date(timestamp).toISOString().split(":00.000Z")[0]
 }
 
 function nowToDatetimeLocal() {
-    return new Date().toISOString().slice(0, 16)
+    const tzOffset = (new Date()).getTimezoneOffset() * 60000;
+    const time = (new Date(Date.now() - tzOffset)).toISOString().slice(0, 16);
+    return time
 }
 
-module.exports = { dateAndtime, datetimeLocalToTimestamp, timestampToDatetimeLocal, nowToDatetimeLocal }
+function remainingTimeBetweenNowAndDate(startTime) {
+    const today = new Date();
+    const Christmas = new Date(startTime);
+    const diffMs = (Christmas - today); // milliseconds between now & Christmas
+    const diffDays = Math.floor(diffMs / 86400000); // days
+    const diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
+    const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+    return diffDays + " days, " + diffHrs + " hours, " + diffMins + " minutes"
+}
+
+
+
+module.exports = {
+    dateAndtime,
+    datetimeLocalToTimestamp,
+    timestampToDatetimeLocal,
+    nowToDatetimeLocal,
+    remainingTimeBetweenNowAndDate
+}

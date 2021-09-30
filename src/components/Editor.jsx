@@ -1,8 +1,7 @@
 import { useContext } from 'react'
 import "styles/Editor.scss"
 import CKEditor from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-// import ReactHtmlParser from "react-html-parser"
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic"
 import { EditorContext } from 'providers/EditorProvider';
 import useTaskManager from 'hooks/useTaskManager';
 import uniqid from "uniqid"
@@ -12,7 +11,7 @@ function Editor() {
     const { taskManager } = useTaskManager()
 
     // all form data are here
-    const { editorOpen, editForm, setEditform, editMode } = useContext(EditorContext)
+    const { editorOpen, setEditorOpen, editForm, setEditform, editMode, setEditMode, resetState } = useContext(EditorContext)
 
     // this will handle all inputs by targeting them once you start typing inside
     const formHanlder = (e) => {
@@ -26,8 +25,13 @@ function Editor() {
         setEditform(prev => ({ ...prev, taskDescription: editor.getData() }))
     }
 
-    const saveTask = (e) => {
+    const cancelAndClose = () => {
+        resetState()
+        setEditMode(false)
+        setEditorOpen(false)
+    }
 
+    const saveTask = (e) => {
         e.preventDefault()
 
         // if edit mode is turned on, task object will be sent to modification, otherwise, Manager will handle new insertion
@@ -82,20 +86,18 @@ function Editor() {
                     <CKEditor editor={ClassicEditor} onChange={handleCKEditor} data={""} disabled={false} />
 
                     {!editMode ?
-                        <button type="submit">Add Task</button>
+                        <button type="submit">Add New Task</button>
                         :
                         <button type="submit">Update Task</button>
                     }
                 </form>
 
+                <button className="close-editor" onClick={cancelAndClose}>cancel and close</button>
 
-                {/* <span>
-                {ReactHtmlParser(inputDataToEdit)}
-            </span> */}
             </div>
         )
     }
-    
+
     return (null)
 }
 

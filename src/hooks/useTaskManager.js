@@ -44,6 +44,10 @@ const useTaskManager = () => {
         }
     }
 
-    return { taskManager }
+    const resetTaskEditor = () =>{
+
+    }
+
+    return { taskManager, resetTaskEditor }
 }
 export default useTaskManager
