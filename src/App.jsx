@@ -1,4 +1,6 @@
 import Editor from 'components/Editor';
+import Filter from 'components/Filter';
+import Overview from 'components/Overview';
 import Task from 'components/Task';
 import ViewTask from 'components/ViewTask';
 import { TaskContext } from 'providers/TaskProvider';
@@ -9,31 +11,33 @@ function App() {
 
   const { tasks } = useContext(TaskContext)
 
-  const [viewTask, setViewTask] = useState({})
+  const [filtered, setFiltered] = useState([])
 
   return (
 
     <div className="App">
 
-      <div className="leftBlock">
-        <div className="filter">
-          filter
-        </div>
+      <div className="left-block">
+
+        <Filter toFilter={tasks} filtered={setFiltered} />
 
         <div className="task-list">
           <p>Tasks</p>
-          {tasks.map(task => (
+          {filtered.map(task => (
             <Task key={task.taskID} task={task} />
           ))}
           <hr />
         </div>
+
+        <Overview />
+
       </div>
 
-      
+      <div className="right-block">
+        <ViewTask />
+        <Editor />
+      </div>
 
-
-      <ViewTask />
-      <Editor />
 
     </div>
   );

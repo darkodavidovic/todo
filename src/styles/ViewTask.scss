@@ -2,4 +2,40 @@
     display: flex;
     flex-direction: column;
     width: 320px;
+
+    .details {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 80px auto;
+        grid-template-rows: repeat(10, 30px);
+
+        .c-t {
+            color: #000000;
+            background-color: rgb(179, 176, 176);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            border-bottom: 1px solid gray;
+        }
+
+        .c-d {
+            color: #000000;
+            background-color: rgb(221, 221, 221);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            border-bottom: 1px solid gray;
+        }
+    }
+
+    .view-command-buttons {
+        display: flex;
+        align-items: center;
+
+        button {
+            margin: 20px;
+        }
+    }
 }

@@ -24,10 +24,20 @@ function nowToDatetimeLocal() {
     return time
 }
 
+function remainingTimeBetweenTwoDates(startTime, endTime) {
+    const start = new Date(startTime);
+    const and = new Date(endTime);
+    const diffMs = (start - and); // milliseconds between now & start
+    const diffDays = Math.floor(diffMs / 86400000); // days
+    const diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
+    const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+    return diffDays + " days, " + diffHrs + " hours, " + diffMins + " minutes"
+}
+
 function remainingTimeBetweenNowAndDate(startTime) {
-    const today = new Date();
-    const Christmas = new Date(startTime);
-    const diffMs = (Christmas - today); // milliseconds between now & Christmas
+    const start = new Date(startTime);
+    const and = new Date();
+    const diffMs = (start - and); // milliseconds between now & start
     const diffDays = Math.floor(diffMs / 86400000); // days
     const diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
     const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
@@ -41,5 +51,6 @@ module.exports = {
     datetimeLocalToTimestamp,
     timestampToDatetimeLocal,
     nowToDatetimeLocal,
-    remainingTimeBetweenNowAndDate
+    remainingTimeBetweenNowAndDate,
+    remainingTimeBetweenTwoDates
 }

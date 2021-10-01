@@ -1,0 +1,25 @@
+.Overview {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    .pieChart {
+        text-align: center;
+        border: 1px solid grey;
+        align-items: center;
+        justify-content: center;
+        margin: 10px 0;
+        width: 100%;
+
+        .title {
+            color: gray;
+        }
+
+        .bizcharts {
+            display: contents;
+        }
+
+
+    }
+}

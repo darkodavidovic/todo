@@ -1,11 +1,10 @@
-import { nowToDatetimeLocal } from 'helpers/dates'
 import { useState, createContext, useRef } from 'react'
 
 export const EditorContext = createContext()
 
 function EditorProvider(props) {
 
-    const [editorOpen, setEditorOpen] = useState(true)
+    const [editorOpen, setEditorOpen] = useState(false)
 
     const [editMode, setEditMode] = useState(false)
 
@@ -15,7 +14,6 @@ function EditorProvider(props) {
         taskCategory: "",
         taskCreatedAt: "",
         taskShouldBeDoneIn: "",
-        taskTimeUsed: "",
         taskTimeSpended: "",
         taskTimeRemains: "",
         taskPriority: "",

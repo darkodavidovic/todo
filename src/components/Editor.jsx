@@ -35,8 +35,15 @@ function Editor() {
         e.preventDefault()
 
         // if edit mode is turned on, task object will be sent to modification, otherwise, Manager will handle new insertion
-        editMode && taskManager(editForm, "update")
-        !editMode && taskManager({ ...editForm, taskID: uniqid() }, "addNew")
+        if (editMode) {
+            taskManager(editForm, "update")
+            resetState()
+        }
+
+        if (!editMode) {
+            taskManager({ ...editForm, taskID: uniqid() }, "addNew")
+            resetState()
+        }
     }
 
     if (editorOpen) {
@@ -48,20 +55,13 @@ function Editor() {
                     <input type="text" name="taskTitle" onChange={formHanlder} value={editForm.taskTitle} />
 
                     <label>Task Category</label>
-                    <select name="taskCategory" onChange={formHanlder} value={editForm.taskCategory}>
-                        <option value="high">High</option>
-                        <option value="medium">Medium</option>
-                        <option value="low">Low</option>
-                    </select>
+                    <input type="text" name="taskCategory" onChange={formHanlder} value={editForm.taskCategory} />
 
                     <label>Task Created At</label>
                     <input type="datetime-local" name="taskCreatedAt" onChange={formHanlder} value={editForm.taskCreatedAt} />
 
                     <label>Task should be done at least</label>
                     <input type="datetime-local" name="taskShouldBeDoneIn" onChange={formHanlder} value={editForm.taskShouldBeDoneIn} />
-
-                    <label>Task Time Used</label>
-                    <input type="text" name="taskTimeUsed" onChange={formHanlder} value={editForm.taskTimeUsed} />
 
                     <label>Time spended on task</label>
                     <input type="text" name="taskTimeSpended" onChange={formHanlder} value={editForm.taskTimeSpended} />
@@ -70,10 +70,16 @@ function Editor() {
                     <input type="text" name="taskTimeRemains" onChange={formHanlder} value={editForm.taskTimeRemains} />
 
                     <label>Task Priority</label>
-                    <input type="text" name="taskPriority" onChange={formHanlder} value={editForm.taskPriority} />
+                    <select name="taskPriority" onChange={formHanlder} value={editForm.taskPriority}>
+                        <option value="0">Select Priority</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
 
                     <label>Task status</label>
                     <select name="taskStatus" onChange={formHanlder} value={editForm.taskStatus}>
+                        <option value="0">Select Status</option>
                         <option value="new">New</option>
                         <option value="in_progress">In Progress</option>
                         <option value="complete">Complete</option>
