@@ -5,6 +5,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic"
 import { EditorContext } from 'providers/EditorProvider';
 import useTaskManager from 'hooks/useTaskManager';
 import uniqid from "uniqid"
+import { nowToDatetimeLocal } from 'helpers/dates';
 
 function Editor() {
 
@@ -31,12 +32,13 @@ function Editor() {
         setEditorOpen(false)
     }
 
+    // submit form
     const saveTask = (e) => {
         e.preventDefault()
 
         // if edit mode is turned on, task object will be sent to modification, otherwise, Manager will handle new insertion
         if (editMode) {
-            taskManager(editForm, "update")
+            taskManager({...editForm, taskTimeSpended: editForm.taskStatus === "complete" ? nowToDatetimeLocal(): false}, "update")
             resetState()
         }
 
@@ -70,11 +72,11 @@ function Editor() {
                     <label>Task should be done at least</label>
                     <input type="datetime-local" name="taskShouldBeDoneIn" onChange={formHanlder} value={editForm.taskShouldBeDoneIn} />
 
-                    <label>Time spended on task</label>
-                    <input type="text" name="taskTimeSpended" onChange={formHanlder} value={editForm.taskTimeSpended} />
+                    {/* <label>Time spended on task</label>
+                    <input type="text" name="taskTimeSpended" onChange={formHanlder} value={editForm.taskTimeSpended} /> */}
 
-                    <label>Ramaining time</label>
-                    <input type="text" name="taskTimeRemains" onChange={formHanlder} value={editForm.taskTimeRemains} />
+                    {/* <label>Ramaining time</label>
+                    <input type="text" name="taskTimeRemains" onChange={formHanlder} value={editForm.taskTimeRemains} /> */}
 
                     <label>Task Priority</label>
                     <select name="taskPriority" onChange={formHanlder} value={editForm.taskPriority}>
@@ -103,9 +105,9 @@ function Editor() {
                         :
                         <button type="submit">Update Task</button>
                     }
+                    <button className="close-editor" onClick={cancelAndClose}>cancel and close</button>
                 </form>
 
-                <button className="close-editor" onClick={cancelAndClose}>cancel and close</button>
 
             </div>
         )

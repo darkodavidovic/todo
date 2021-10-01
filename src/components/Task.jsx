@@ -1,3 +1,4 @@
+import  { EditorContext } from 'providers/EditorProvider';
 import { ViewTaskContext } from 'providers/ViewTaskProvider';
 import { useContext } from 'react'
 import 'styles/Task.scss';
@@ -19,10 +20,13 @@ function Task({ task }) {
     } = task
 
     const { viewTask, setViewTask, viewMode, setViewMode } = useContext(ViewTaskContext)
+    const { setEditMode, setEditorOpen} = useContext(EditorContext)
 
     const viewThisTask = () => {
         setViewTask(task)
         setViewMode(true)
+        setEditMode(false)
+        setEditorOpen(false)
     }
 
     const styles = {

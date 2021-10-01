@@ -10,12 +10,11 @@ function EditorProvider(props) {
 
     const initialState = useRef({
         // taskID: "ku77ho3c",
-        taskTitle: "radnom",
-        taskCategory: "",
+        taskTitle: "random",
+        taskCategory: "category",
         taskCreatedAt: "",
         taskShouldBeDoneIn: "",
         taskTimeSpended: "",
-        taskTimeRemains: "",
         taskPriority: "",
         taskStatus: "",
         taskDescription: "",

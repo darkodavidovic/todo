@@ -44,6 +44,26 @@ function remainingTimeBetweenNowAndDate(startTime) {
     return diffDays + " days, " + diffHrs + " hours, " + diffMins + " minutes"
 }
 
+//2021-10-01
+const dateOnlySlice = (date) => {
+    let input = date.split("-")
+    const yyyy = input[0]
+    const mm = input[1]
+    const dd = input[2]
+    const t = yyyy + "-" + mm + "-" + dd
+    return t.slice(0, 10)
+}
+
+// dd/mm/yyyy 00:00
+const timeAndDateFormated = (string) => {
+    let date = string.split("T")[0].split("-")
+    let time = string.split("T")[1]
+    const yyyy = date[0]
+    const mm = date[1]
+    const dd = date[2]
+    const t = dd + "/" + mm + "/" + yyyy + " " + time
+    return t
+}
 
 
 module.exports = {
@@ -52,5 +72,7 @@ module.exports = {
     timestampToDatetimeLocal,
     nowToDatetimeLocal,
     remainingTimeBetweenNowAndDate,
-    remainingTimeBetweenTwoDates
+    remainingTimeBetweenTwoDates,
+    dateOnlySlice,
+    timeAndDateFormated
 }

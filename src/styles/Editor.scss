@@ -1,10 +1,11 @@
 .Editor {
     display: flex;
-
-    width: 500px;
+    justify-content: center;
+    width: 100%;
 
     form {
         display: flex;
+        width: 90%;
         justify-content: center;
         flex-direction: column;
 
@@ -13,8 +14,12 @@
             font-weight: bold;
         }
 
-        .ck-editor {
-            border: 2px solid green;
+        input,
+        select {
+            padding: 5px;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid blue;
         }
     }
 }

@@ -1,10 +1,14 @@
+import { dateOnlySlice } from 'helpers/dates'
 import { EditorContext } from 'providers/EditorProvider'
+import { ViewTaskContext } from 'providers/ViewTaskProvider'
 import { useContext, useEffect, useState } from 'react'
 import "styles/Filter.scss"
 
 function Filter({ toFilter, filtered }) {
 
     const { setEditorOpen } = useContext(EditorContext)
+
+    const { viewTask, setViewTask, viewMode, setViewMode } = useContext(ViewTaskContext)
 
     const [filter, setFilter] = useState({
         priority: true,
@@ -25,29 +29,38 @@ function Filter({ toFilter, filtered }) {
         }
     }
 
+    const addNewTask = (params) => {
+        setEditorOpen(true)
+        setViewMode(false)
+        setViewTask({})
+    }
 
 
     useEffect(() => {
+
+        let sorted = []
 
         if (filter.status) {
             const newTasks = toFilter.filter(task => task.taskStatus === "new")
             const inprogress = toFilter.filter(task => task.taskStatus === "in_progress")
             const complete = toFilter.filter(task => task.taskStatus === "complete")
-            const sorted = [...newTasks, ...inprogress, ...complete]
+            sorted = [...newTasks, ...inprogress, ...complete]
             filtered(sorted)
-            return
         }
 
         if (filter.priority) {
             const high = toFilter.filter(task => task.taskPriority === "high")
             const medium = toFilter.filter(task => task.taskPriority === "medium")
             const low = toFilter.filter(task => task.taskPriority === "low")
-            const sorted = [...high, ...medium, ...low]
+            sorted = [...high, ...medium, ...low]
             filtered(sorted)
-            return
         }
 
-        filtered(toFilter)
+        if (filter.date.length > 0) {
+            console.log(filter.date)
+            const f = toFilter.filter(task => dateOnlySlice(task.taskCreatedAt) === filter.date)
+            filtered(f)
+        }
 
 
     }, [filter, toFilter])
@@ -63,9 +76,10 @@ function Filter({ toFilter, filtered }) {
                 <label>By Status</label>
                 <input className="checkbox" checked={filter.status} type="checkbox" onChange={(e) => { checkedBox("status") }} />
 
-                <input className="input-search" type="date" onChange={(e) => setFilter({ ...filter, date: e.target.value })} value={filter.date} /> <button className="button-search">search</button>
+                <input className="input-search" type="date" onChange={(e) => setFilter({ ...filter, date: e.target.value })} value={filter.date} />
+                <button className="button-search" onClick={() => setFilter({ ...filter, date: "" })}>clear</button>
 
-                <button className="new-task-button" onClick={() => setEditorOpen(true)}>add new task</button>
+                <button className="new-task-button" onClick={addNewTask}>add new task</button>
             </div>
 
         </div>

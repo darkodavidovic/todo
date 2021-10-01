@@ -29,6 +29,7 @@ const useTaskManager = () => {
                 if (exist !== -1) {
                     update[exist] = { ...task }
                     setTasks(update)
+                    console.log({update})
                     saveToLocalStorage(update)
                 }
                 break;

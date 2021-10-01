@@ -5,7 +5,7 @@ import ReactHtmlParser from "react-html-parser"
 import { useContext } from 'react'
 import 'styles/ViewTask.scss';
 
-import { nowToDatetimeLocal, remainingTimeBetweenNowAndDate } from 'helpers/dates'
+import { remainingTimeBetweenNowAndDate, remainingTimeBetweenTwoDates, timeAndDateFormated } from 'helpers/dates'
 
 function ViewTask() {
 
@@ -40,7 +40,6 @@ function ViewTask() {
         setViewMode(false)
     }
 
-
     const { taskManager } = useTaskManager()
 
     const deleteTask = () => {
@@ -48,14 +47,13 @@ function ViewTask() {
         setViewMode(false)
     }
 
-    const timestampDefference = () => {
-        return remainingTimeBetweenNowAndDate(taskShouldBeDoneIn)
+    const spendedTime = () => {
+        if (taskTimeSpended) {
+            return remainingTimeBetweenTwoDates(taskTimeSpended, taskCreatedAt)
+        }
+        return "Not Available"
     }
 
-    const statusNameHandler = (status) => {
-        status.split("_").join(" ")
-    }
-    
 
     if (viewMode) {
         return (
@@ -67,10 +65,9 @@ function ViewTask() {
                     <span className="c-t">Task ID</span><span className="c-d">{taskID}</span>
                     <span className="c-t">Title</span><span className="c-d">{taskTitle}</span>
                     <span className="c-t">Category</span><span className="c-d">{taskCategory}</span>
-                    <span className="c-t">Created at</span><span className="c-d">{taskCreatedAt}</span>
-                    <span className="c-t">Remainin Time</span><span className="c-d">{timestampDefference()}</span>
-                    <span className="c-t">Time used on task</span><span className="c-d">{taskTimeSpended}</span>
-                    <span className="c-t">Time spended on task</span><span className="c-d">{taskTimeRemains}</span>
+                    <span className="c-t">Created at</span><span className="c-d">{timeAndDateFormated(taskCreatedAt)}</span>
+                    <span className="c-t">Remaining Time</span><span className="c-d">{remainingTimeBetweenNowAndDate(taskShouldBeDoneIn)}</span>
+                    <span className="c-t">Time used on task</span><span className="c-d">{spendedTime()}</span>
                     <span className="c-t">Priority</span><span className="c-d upper-case">{taskPriority}</span>
                     <span className="c-t">Status</span><span className="c-d upper-case">{taskStatus?.split("_").join(" ")}</span>
                     <span className="c-t">Asigned To</span><span className="c-d">{taskAsignedTo}</span>
@@ -78,7 +75,7 @@ function ViewTask() {
 
                 <h1>Task Descrtiption</h1>
                 <hr />
-                
+
                 <div className="view-task-description">{ReactHtmlParser(taskDescription)}</div>
 
                 <hr />

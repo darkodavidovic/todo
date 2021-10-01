@@ -38,7 +38,7 @@ function App() {
           </div>
 
           <div className="task-column">
-            <p>Compleded Tasks</p>
+            <p>Completed Tasks</p>
             {filtered.filter(task => task.taskStatus === "complete").map(task => (
               <Task key={task.taskID} task={task} />
             ))}
