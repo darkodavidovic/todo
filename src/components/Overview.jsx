@@ -18,15 +18,15 @@ function Overview() {
     const { tasks } = useContext(TaskContext)
 
     const [pie1Data, setPie1Data] = useState([
-        { task: "High", count: 40, percent: 0.4 },
-        { task: "Low", count: 21, percent: 0.21 },
-        { task: "Medium", count: 17, percent: 0.17 }
+        { task: "High", count: 0, percent: 0.0 },
+        { task: "Low", count: 0, percent: 0.0 },
+        { task: "Medium", count: 0, percent: 0.0 }
     ])
 
     const [pie2Data, setPie2Data] = useState([
-        { task: "New", count: 40, percent: 0.4 },
-        { task: "In Progress", count: 21, percent: 0.21 },
-        { task: "Complete", count: 17, percent: 0.17 }
+        { task: "New", count: 0, percent: 0.0 },
+        { task: "In Progress", count: 0, percent: 0.0 },
+        { task: "Complete", count: 0, percent: 0.0 }
     ])
 
     const cols = {
@@ -43,7 +43,6 @@ function Overview() {
         const c = (value / tasks.length) * 100
         return c
     }
-
 
     const toPercent = (value) => {
         const c = (value / tasks.length) * 100 / 100

@@ -2,6 +2,7 @@
   "name": "todo",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/react/todo",
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "12.1.0",
     "@ckeditor/ckeditor5-react": "1.1.3",
