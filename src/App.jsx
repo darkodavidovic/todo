@@ -4,6 +4,7 @@ import Overview from 'components/Overview';
 import Task from 'components/Task';
 import ToastContainer from 'components/ToastContainer';
 import ViewTask from 'components/ViewTask';
+import { EditorContext } from 'providers/EditorProvider';
 import { TaskContext } from 'providers/TaskProvider';
 import { useContext, useState } from 'react';
 import './App.scss';
@@ -11,6 +12,8 @@ import './App.scss';
 function App() {
 
   const { tasks } = useContext(TaskContext)
+
+  const { setEditMode, setEditorOpen, setEditform } = useContext(EditorContext)
 
   const [filtered, setFiltered] = useState([])
 

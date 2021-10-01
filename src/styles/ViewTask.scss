@@ -2,7 +2,10 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    max-width: 40vw;
+    min-width: 30vw;
     padding: 20px;
+    background-color: white;
 
     .details {
         width: 100%;

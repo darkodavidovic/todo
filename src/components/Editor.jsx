@@ -143,7 +143,7 @@ function Editor() {
                     <input type="text" name="taskAsignedTo" onChange={formHanlder} value={editForm.taskAsignedTo} />
 
                     <label>Task Description</label>
-                    <CKEditor editor={ClassicEditor} onChange={handleCKEditor} data={""} disabled={false} />
+                    <CKEditor editor={ClassicEditor} onChange={handleCKEditor} data={editForm.taskDescription} disabled={false} />
 
                     {!editMode ?
                         <button type="submit">Add New Task</button>
