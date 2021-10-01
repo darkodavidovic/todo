@@ -31,7 +31,7 @@ function Task({ task }) {
     }
 
     const styles = {
-        high: { backgroundColor: "red" },
+        high: { backgroundColor: "red", color: "white" },
         medium: { backgroundColor: "yellow" },
         low: { backgroundColor: "white" }
     }
