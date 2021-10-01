@@ -38,16 +38,19 @@ function Overview() {
         },
     };
 
+    // percentages calculator
     const percentShare = (value) => {
         const c = (value / tasks.length) * 100
         return c
     }
+
 
     const toPercent = (value) => {
         const c = (value / tasks.length) * 100 / 100
         return Number(c)
     }
 
+    // statistic logic
     useEffect(() => {
         if (tasks.length > 0) {
 

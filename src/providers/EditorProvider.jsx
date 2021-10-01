@@ -10,15 +10,15 @@ function EditorProvider(props) {
 
     const initialState = useRef({
         // taskID: "ku77ho3c",
-        taskTitle: "random",
-        taskCategory: "category",
+        taskTitle: "",
+        taskCategory: "",
         taskCreatedAt: "",
         taskShouldBeDoneIn: "",
         taskTimeSpended: "",
         taskPriority: "",
         taskStatus: "",
         taskDescription: "",
-        taskAsignedTo: "Darko"
+        taskAsignedTo: ""
     })
 
     const [editForm, setEditform] = useState(initialState.current)

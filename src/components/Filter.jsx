@@ -16,6 +16,7 @@ function Filter({ toFilter, filtered }) {
         date: ""
     })
 
+    // checkboxes handler
     const checkedBox = (box) => {
         switch (box) {
             case "status":
@@ -32,12 +33,15 @@ function Filter({ toFilter, filtered }) {
         }
     }
 
+    // this will call editor
     const addNewTask = (params) => {
         setEditorOpen(true)
         setViewMode(false)
         setViewTask({})
     }
 
+
+    // sorting
     useEffect(() => {
 
         let sorted = []
@@ -59,7 +63,6 @@ function Filter({ toFilter, filtered }) {
         }
 
         if (filter.date.length > 0) {
-            console.log(filter.date)
             const f = toFilter.filter(task => dateOnlySlice(task.taskCreatedAt) === filter.date)
             filtered(f)
         }

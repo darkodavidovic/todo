@@ -5,13 +5,16 @@ import App from './App';
 import TaskProvider from 'providers/TaskProvider';
 import EditorProvider from 'providers/EditorProvider';
 import ViewTaskProvider from 'providers/ViewTaskProvider';
-
+import ToasterProvider from 'providers/ToasterProvider';
+<ToasterProvider />
 ReactDOM.render(
   <React.StrictMode>
     <TaskProvider>
       <EditorProvider>
         <ViewTaskProvider>
-          <App />
+          <ToasterProvider>
+            <App />
+          </ToasterProvider>
         </ViewTaskProvider>
       </EditorProvider>
     </TaskProvider>

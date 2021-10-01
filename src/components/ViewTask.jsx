@@ -11,6 +11,7 @@ function ViewTask() {
 
     const { viewTask, setViewTask, viewMode, setViewMode } = useContext(ViewTaskContext)
 
+    // destructured state from signle task
     const {
         taskID,
         taskTitle,
@@ -26,6 +27,7 @@ function ViewTask() {
 
     const { setEditMode, setEditorOpen, setEditform } = useContext(EditorContext)
 
+    // this will call editor form in edit mode
     const modifyTask = () => {
         setEditform(viewTask)
         setEditorOpen(true)
@@ -34,6 +36,7 @@ function ViewTask() {
         setViewTask({})
     }
 
+    // closing view mode
     const closeView = () => {
         setViewTask({})
         setViewMode(false)
@@ -41,11 +44,14 @@ function ViewTask() {
 
     const { taskManager } = useTaskManager()
 
+
+    // this will remove task from the list
     const deleteTask = () => {
         taskManager(viewTask, "delete")
         setViewMode(false)
     }
 
+    // calculating spanded time
     const spendedTime = () => {
         if (taskTimeSpended) {
             return remainingTimeBetweenTwoDates(taskTimeSpended, taskCreatedAt)
@@ -80,7 +86,11 @@ function ViewTask() {
                 <hr />
 
                 <div className="view-command-buttons">
+                    {viewTask.taskStatus === "complete" ?
+                        <button>modify</button>
+                        :
                     <button onClick={modifyTask}>modify</button>
+                    }
                     <button onClick={deleteTask}>delete</button>
                     <button onClick={closeView}>close</button>
                 </div>

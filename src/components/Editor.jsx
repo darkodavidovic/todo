@@ -6,10 +6,12 @@ import { EditorContext } from 'providers/EditorProvider';
 import useTaskManager from 'hooks/useTaskManager';
 import uniqid from "uniqid"
 import { nowToDatetimeLocal } from 'helpers/dates';
+import useToaster from 'hooks/useToaster';
 
 function Editor() {
 
     const { taskManager } = useTaskManager()
+    const { showToast } = useToaster()
 
     // all form data are here
     const { editorOpen, setEditorOpen, editForm, setEditform, editMode, setEditMode, resetState } = useContext(EditorContext)
@@ -26,6 +28,7 @@ function Editor() {
         setEditform(prev => ({ ...prev, taskDescription: editor.getData() }))
     }
 
+    // colose editor
     const cancelAndClose = () => {
         resetState()
         setEditMode(false)
@@ -36,14 +39,56 @@ function Editor() {
     const saveTask = (e) => {
         e.preventDefault()
 
+        if (editForm.taskTitle.length < 5) {
+            showToast({ type: "error", title: "Task title not valid. ", message: "You need minimum 5 characters", position: "top-center", expire: 3 })
+            return
+        }
+
+        if (editForm.taskCategory.length < 3) {
+            showToast({ type: "error", title: "Task category is valid. ", message: "You need minimum 3 characters", position: "top-center", expire: 3 })
+            return
+        }
+
+        if (editForm.taskCreatedAt.length < 3) {
+            showToast({ type: "error", message: "Creation date not selected.", position: "top-center", expire: 3 })
+            return
+        }
+
+        if (editForm.taskShouldBeDoneIn.length < 3) {
+            showToast({ type: "error", message: "Task expecting time not selected.", position: "top-center", expire: 3 })
+            return
+        }
+
+        if (editForm.taskPriority === "") {
+            showToast({ type: "error", message: "Task Priority not selected.", position: "top-center", expire: 3 })
+            return
+        }
+
+        if (editForm.taskStatus === "") {
+            showToast({ type: "error", message: "Task Status not selected.", position: "top-center", expire: 3 })
+            return
+        }
+
+        if (editForm.taskAsignedTo === "") {
+            showToast({ type: "error", message: "Select person for this task.", position: "top-center", expire: 3 })
+            return
+        }
+
+        if (editForm.taskDescription < 100) {
+            showToast({ type: "error", title: "Task description not valid. ", message: "You need minimum 100 characters", position: "top-center", expire: 3 })
+            return
+        }
+
         // if edit mode is turned on, task object will be sent to modification, otherwise, Manager will handle new insertion
         if (editMode) {
-            taskManager({...editForm, taskTimeSpended: editForm.taskStatus === "complete" ? nowToDatetimeLocal(): false}, "update")
+            taskManager({ ...editForm, taskTimeSpended: editForm.taskStatus === "complete" ? nowToDatetimeLocal() : false }, "update")
+            showToast({ type: "success", message: "Taski successfully updated.", position: "top-center", expire: 3 })
             resetState()
         }
 
         if (!editMode) {
             taskManager({ ...editForm, taskID: uniqid() }, "addNew")
+            showToast({ type: "success", message: "New task successfully added.", position: "top-center", expire: 3 })
             resetState()
         }
     }
@@ -80,7 +125,7 @@ function Editor() {
 
                     <label>Task Priority</label>
                     <select name="taskPriority" onChange={formHanlder} value={editForm.taskPriority}>
-                        <option value="0">Select Priority</option>
+                        <option value="">Select Priority</option>
                         <option value="high">High</option>
                         <option value="medium">Medium</option>
                         <option value="low">Low</option>
@@ -88,7 +133,7 @@ function Editor() {
 
                     <label>Task status</label>
                     <select name="taskStatus" onChange={formHanlder} value={editForm.taskStatus}>
-                        <option value="0">Select Status</option>
+                        <option value="">Select Status</option>
                         <option value="new">New</option>
                         <option value="in_progress">In Progress</option>
                         <option value="complete">Complete</option>
