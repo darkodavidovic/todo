@@ -83,7 +83,7 @@ function Filter({ toFilter, filtered }) {
                 <input className="input-search" type="date" onChange={(e) => setFilter({ ...filter, date: e.target.value })} value={filter.date} />
                 <button className="button-search" onClick={() => setFilter({ ...filter, date: "" })}>clear</button>
 
-                <button className="new-task-button" onClick={addNewTask}>add new task</button>
+                <button className="new-task-button" onClick={addNewTask}>Add New Task</button>
             </div>
 
         </div>

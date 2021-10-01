@@ -5,6 +5,11 @@
     flex-direction: column;
     background-color: rgb(4, 4, 4);
 
+    background-image: url(../assets/blr2.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+
     .pieChart {
         text-align: center;
         border: 1px solid grey;

@@ -4,7 +4,7 @@ export const EditorContext = createContext()
 
 function EditorProvider(props) {
 
-    const [editorOpen, setEditorOpen] = useState(false)
+    const [editorOpen, setEditorOpen] = useState(true)
 
     const [editMode, setEditMode] = useState(false)
 
