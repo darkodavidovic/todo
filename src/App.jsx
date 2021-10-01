@@ -22,11 +22,27 @@ function App() {
         <Filter toFilter={tasks} filtered={setFiltered} />
 
         <div className="task-list">
-          <p>Tasks</p>
-          {filtered.map(task => (
-            <Task key={task.taskID} task={task} />
-          ))}
-          <hr />
+
+          <div className="task-column">
+            <p>New Tasks</p>
+            {filtered.filter(task => task.taskStatus === "new").map(task => (
+              <Task key={task.taskID} task={task} />
+            ))}
+          </div>
+
+          <div className="task-column">
+            <p>Tasks In Progress</p>
+            {filtered.filter(task => task.taskStatus === "in_progress").map(task => (
+              <Task key={task.taskID} task={task} />
+            ))}
+          </div>
+
+          <div className="task-column">
+            <p>Compleded Tasks</p>
+            {filtered.filter(task => task.taskStatus === "complete").map(task => (
+              <Task key={task.taskID} task={task} />
+            ))}
+          </div>
         </div>
 
         <Overview />

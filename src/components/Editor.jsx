@@ -48,8 +48,15 @@ function Editor() {
 
     if (editorOpen) {
         return (
-            <div className="Editor" onSubmit={saveTask}>
-                <form>
+            <div className="Editor">
+
+                <form onSubmit={saveTask}>
+
+                    {!editMode ?
+                        <h1>New Task</h1>
+                        :
+                        <h1>Modify Task</h1>
+                    }
 
                     <label>Task Title</label>
                     <input type="text" name="taskTitle" onChange={formHanlder} value={editForm.taskTitle} />

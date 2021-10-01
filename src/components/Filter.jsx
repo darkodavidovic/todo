@@ -4,11 +4,12 @@ import "styles/Filter.scss"
 
 function Filter({ toFilter, filtered }) {
 
-    const { editorOpen, setEditorOpen, editForm, setEditform, editMode, setEditMode, resetState } = useContext(EditorContext)
+    const { setEditorOpen } = useContext(EditorContext)
 
     const [filter, setFilter] = useState({
-        priority: false,
-        status: false
+        priority: true,
+        status: false,
+        date: ""
     })
 
     const checkedBox = (box) => {
@@ -23,6 +24,8 @@ function Filter({ toFilter, filtered }) {
                 break;
         }
     }
+
+
 
     useEffect(() => {
 
@@ -51,16 +54,20 @@ function Filter({ toFilter, filtered }) {
 
     return (
         <div className="Filter">
-            <h1>FILTER</h1>
+            <h2 className="title">FILTER</h2>
 
-            <label>By Priority</label>
-            <input className="checkbox" checked={filter.priority} type="checkbox" onChange={(e) => { checkedBox("priority") }} />
+            <div className="filter-commands">
+                <label>By Priority</label>
+                <input className="checkbox" checked={filter.priority} type="checkbox" onChange={(e) => { checkedBox("priority") }} />
 
-            <label>By Status</label>
-            <input className="checkbox" checked={filter.status} type="checkbox" onChange={(e) => { checkedBox("status") }} />
+                <label>By Status</label>
+                <input className="checkbox" checked={filter.status} type="checkbox" onChange={(e) => { checkedBox("status") }} />
 
+                <input className="input-search" type="date" onChange={(e) => setFilter({ ...filter, date: e.target.value })} value={filter.date} /> <button className="button-search">search</button>
 
-            <button onClick={() => setEditorOpen(true)}>add new task</button>
+                <button className="new-task-button" onClick={() => setEditorOpen(true)}>add new task</button>
+            </div>
+
         </div>
     )
 }

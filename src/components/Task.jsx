@@ -25,12 +25,30 @@ function Task({ task }) {
         setViewMode(true)
     }
 
+    const styles = {
+        high: { backgroundColor: "red" },
+        medium: { backgroundColor: "yellow" },
+        low: { backgroundColor: "white" }
+    }
+
     return (
-        <div className="Task">
-            <span>{taskTitle}</span>
-            <span>{taskAsignedTo}</span>
-            <span>{taskPriority}</span>
-            <button onClick={viewThisTask}>view task</button>
+        <div className="Task" onClick={viewThisTask} style={styles[task.taskPriority]}>
+
+            <div className="task-row">
+                <span>Task Title:</span> <span>{taskTitle}</span>
+            </div>
+
+            <div className="task-row">
+                <span>Assigned To:</span> <span>{taskAsignedTo}</span>
+            </div>
+
+            <div className="task-row">
+                <span>Task Priority:</span> <span>{taskPriority}</span>
+            </div>
+
+            <div className="task-row">
+                <span>Task Status:</span> <span>{taskStatus?.split("_").join(" ")}</span>
+            </div>
         </div>
     )
 }
