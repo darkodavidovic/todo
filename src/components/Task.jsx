@@ -1,3 +1,4 @@
+import { timeAndDateFormated } from 'helpers/dates';
 import { EditorContext } from 'providers/EditorProvider';
 import { ViewTaskContext } from 'providers/ViewTaskProvider';
 import { useContext } from 'react'
@@ -8,7 +9,7 @@ function Task({ task }) {
         // taskID,
         taskTitle,
         // taskCategory,
-        // taskCreatedAt,
+        taskCreatedAt,
         // taskShouldBeDoneIn,
         // taskTimeUsed,
         // taskTimeSpended,
@@ -53,6 +54,11 @@ function Task({ task }) {
             <div className="task-row">
                 <span>Task Status:</span> <span>{taskStatus?.split("_").join(" ")}</span>
             </div>
+
+            <div className="task-row">
+                <span>Created At:</span> <span>{timeAndDateFormated(taskCreatedAt)}</span>
+            </div>
+
         </div>
     )
 }
