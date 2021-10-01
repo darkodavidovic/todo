@@ -38,12 +38,6 @@ function Overview() {
         },
     };
 
-    const percentageDecrease = (count) => {
-        const c = (count - tasks.length) / tasks.length * 100
-        console.log(c)
-        return c
-    }
-
     const percentShare = (value) => {
         const c = (value / tasks.length) * 100
         return c
@@ -79,7 +73,7 @@ function Overview() {
 
 
         }
-
+        // eslint-disable-next-line
     }, [tasks])
 
     return (

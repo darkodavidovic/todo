@@ -1,0 +1,80 @@
+.ToastContainer {
+    margin-top: 55px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 55px);
+    pointer-events: none;
+    z-index: 99;
+
+    @mixin box {
+        display: flex;
+        position: absolute;
+        padding: 10px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .tl {
+        @include box;
+        justify-content: flex-start;
+        flex-direction: column
+    }
+
+    .tc {
+        @include box;
+        align-items: center;
+        flex-direction: column
+    }
+
+    .tr {
+        @include box;
+        align-items: flex-end;
+        flex-direction: column;
+    }
+
+    .cl {
+        @include box;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .cc {
+        @include box;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .cr {
+        @include box;
+        justify-content: center;
+        align-items: flex-end;
+        flex-direction: column;
+    }
+
+    .bl {
+        @include box;
+        flex-direction: column-reverse;
+        justify-content: flex-start;
+        padding-top: 20px;
+    }
+
+    .bc {
+        @include box;
+        justify-content: flex-end;
+        align-items: center;
+        flex-direction: column;
+        padding-bottom: 20px;
+    }
+
+    .br {
+        @include box;
+        justify-content: flex-end;
+        align-items: flex-end;
+        flex-direction: column;
+        padding-bottom: 20px;
+    }
+}

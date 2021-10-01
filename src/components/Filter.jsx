@@ -8,7 +8,7 @@ function Filter({ toFilter, filtered }) {
 
     const { setEditorOpen } = useContext(EditorContext)
 
-    const { viewTask, setViewTask, viewMode, setViewMode } = useContext(ViewTaskContext)
+    const { setViewTask, setViewMode } = useContext(ViewTaskContext)
 
     const [filter, setFilter] = useState({
         priority: true,
@@ -26,6 +26,9 @@ function Filter({ toFilter, filtered }) {
                 if (!filter.priority) setFilter({ ...filter, priority: true, status: false })
                 if (filter.priority && !filter.status) setFilter({ ...filter, priority: false })
                 break;
+
+            default:
+                break;
         }
     }
 
@@ -34,7 +37,6 @@ function Filter({ toFilter, filtered }) {
         setViewMode(false)
         setViewTask({})
     }
-
 
     useEffect(() => {
 
@@ -61,8 +63,7 @@ function Filter({ toFilter, filtered }) {
             const f = toFilter.filter(task => dateOnlySlice(task.taskCreatedAt) === filter.date)
             filtered(f)
         }
-
-
+        // eslint-disable-next-line
     }, [filter, toFilter])
 
     return (

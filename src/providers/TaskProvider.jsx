@@ -9,6 +9,7 @@ function TaskProvider(props) {
     useEffect(() => {
         const local = localStorage.getItem("tasks")
         local && setTasks(JSON.parse(local))
+        // eslint-disable-next-line
     }, [])
 
     return (

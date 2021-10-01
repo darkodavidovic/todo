@@ -1,26 +1,26 @@
-import  { EditorContext } from 'providers/EditorProvider';
+import { EditorContext } from 'providers/EditorProvider';
 import { ViewTaskContext } from 'providers/ViewTaskProvider';
 import { useContext } from 'react'
 import 'styles/Task.scss';
 
 function Task({ task }) {
     const {
-        taskID,
+        // taskID,
         taskTitle,
-        taskCategory,
-        taskCreatedAt,
-        taskShouldBeDoneIn,
-        taskTimeUsed,
-        taskTimeSpended,
-        taskTimeRemains,
+        // taskCategory,
+        // taskCreatedAt,
+        // taskShouldBeDoneIn,
+        // taskTimeUsed,
+        // taskTimeSpended,
+        // taskTimeRemains,
         taskPriority,
         taskStatus,
-        taskDescription,
+        // taskDescription,
         taskAsignedTo
     } = task
 
-    const { viewTask, setViewTask, viewMode, setViewMode } = useContext(ViewTaskContext)
-    const { setEditMode, setEditorOpen} = useContext(EditorContext)
+    const { setViewTask, setViewMode } = useContext(ViewTaskContext)
+    const { setEditMode, setEditorOpen } = useContext(EditorContext)
 
     const viewThisTask = () => {
         setViewTask(task)

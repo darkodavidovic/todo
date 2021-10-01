@@ -2,6 +2,7 @@ import Editor from 'components/Editor';
 import Filter from 'components/Filter';
 import Overview from 'components/Overview';
 import Task from 'components/Task';
+import ToastContainer from 'components/ToastContainer';
 import ViewTask from 'components/ViewTask';
 import { TaskContext } from 'providers/TaskProvider';
 import { useContext, useState } from 'react';
@@ -54,7 +55,7 @@ function App() {
         <Editor />
       </div>
 
-
+      <ToastContainer />
     </div>
   );
 }

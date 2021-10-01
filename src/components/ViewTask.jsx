@@ -18,7 +18,6 @@ function ViewTask() {
         taskCreatedAt,
         taskShouldBeDoneIn,
         taskTimeSpended,
-        taskTimeRemains,
         taskPriority,
         taskStatus,
         taskDescription,
